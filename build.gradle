@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.12.0' // Reporting engine
+}
+
+group = 'com.architect.path'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+// This block tells the plugin which Allure version to use for the report generation
+allure {
+    version = '2.25.0' // This matches your library version below
+}
+
+dependencies {
+    // 1. The Engine: Playwright (Java Binding)
+    implementation 'com.microsoft.playwright:playwright:1.49.0'
+
+    // 2. The Runner: TestNG (Industry Standard for Java)
+    testImplementation 'org.testng:testng:7.9.0'
+
+    // 3. The Visualizer: Allure (For Dashboards later)
+    testImplementation 'io.qameta.allure:allure-testng:2.25.0'
+}
+
+test {
+    useTestNG() // Tells Gradle to use TestNG, not JUnit
+}
