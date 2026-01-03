@@ -9,11 +9,11 @@ public class HybridLoginTest {
 
         // --- ADD THIS LINE ---
         // Visit the domain first to initialize the "storage state" for this domain
-        //page.navigate("https://www.saucedemo.com/");
+        page.navigate("https://www.saucedemo.com/");
 
         // 2. THE ARCHITECT MOVE: Inject Session *before* navigating
         // We do this on the CONTEXT, because cookies belong to the Context, not the Page.
-        //AuthService.injectAuth(page.context());
+        AuthService.injectAuth(page.context());
 
         // 3. Navigate directly to the internal dashboard
         // Note: We intentionally skip 'index.html' (Login Page) and go to 'inventory.html'

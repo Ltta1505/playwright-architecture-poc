@@ -17,7 +17,7 @@ public class FactoryTest {
 
         Page secondPage = PlaywrightFactory.getBrowser().newContext().newPage();
 
-        secondPage.navigate("https://vnexpress.net/");
+        secondPage.navigate("https://gmail.com/");
 
         // 3. Close it cleanly
         PlaywrightFactory.close();

@@ -1,5 +1,6 @@
 import com.automation.core.PlaywrightFactory;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Route;
 
 public class RealNetworkInterceptTest {
     public static void main(String[] args) {
@@ -19,7 +20,13 @@ public class RealNetworkInterceptTest {
         // This is the specific signal sent when you click the button.
         page.route("**/authenticate", route -> {
             System.out.println(">>>TRAP TRIGGERED! Killing request to: " + route.request().url());
-            route.abort("failed"); // Simulate Server Crash (500/Network Error)
+            // route.abort("failed"); // Simulate Server Crash (500/Network Error)
+            // THE FIX: Simulate a Server Error (500) instead of a Network Abort
+            route.fulfill(new Route.FulfillOptions()
+                    .setStatus(500)
+                    .setContentType("text/html")
+                    .setBody("<h1>500 - Internal Server Error</h1><p>Simulated Failure</p>")
+            );
         });
 
         // 4. Trigger the Action
@@ -37,7 +44,7 @@ public class RealNetworkInterceptTest {
         // It is okay if we are stuck on "/authenticate" with an error page.
         boolean reachedSecureArea = currentUrl.contains("/secure");
 
-        page.waitForURL("**/authenticate.html");
+        page.waitForURL("**/authenticate");
 
         if (!reachedSecureArea) {
             System.out.println("[PASS] Resilience Success: We blocked access to the secure area.");
