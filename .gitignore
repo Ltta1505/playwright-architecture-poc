@@ -48,3 +48,4 @@ build/
 # Java
 *.class
 *.log
+allure-results/*.json

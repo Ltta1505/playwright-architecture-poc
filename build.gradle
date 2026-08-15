@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'io.qameta.allure' version '2.12.0' // Reporting engine
 }
 
 group = 'com.architect.path'
@@ -10,9 +9,10 @@ repositories {
     mavenCentral()
 }
 
-// This block tells the plugin which Allure version to use for the report generation
-allure {
-    version = '2.25.0' // This matches your library version below
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
 dependencies {
