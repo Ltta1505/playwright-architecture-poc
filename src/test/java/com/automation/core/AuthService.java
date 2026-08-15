@@ -5,6 +5,10 @@ import com.microsoft.playwright.options.Cookie;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * AuthService is responsible for injecting authentication cookies into the browser context.
+ * This allows bypassing the login process for testing purposes.
+ */
 public class AuthService {
 
     public static void injectAuth(BrowserContext context) {
